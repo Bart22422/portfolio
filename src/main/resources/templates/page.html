@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" type="image/x-icon" href="favicon.ico" >
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+	<style type="text/css">
+		.main{
+			margin-top:4rem;
+			font-family: 'JetBrains Mono', monospace;
+			margin-inline:auto;
+			
+			width:80%;
+		}
+		.container{
+		 
+		  width:800px;
+		  margin-top:10px;
+		  position:relative;
+		 padding: 2rem;
+		  border:2px solid #666;
+		
+		}
+		  .container::after{
+		    content:" ";
+		    display:block;
+		    position:absolute;
+		    top:0;
+		    left:0;
+		    bottom:0;
+		    right:0;
+		    background:transparentize(blue,0.9);
+		    opacity:0;
+		    z-index:2;
+		    pointer-events:none;
+		  }
+		 
+		  .container::before{
+		    content:" ";
+		    display:block;
+		    position:absolute;
+		    top:0;
+		    left:0;
+		    bottom:0;
+		    right:0;
+		    background:linear-gradient(transparentize(red,1) 50%, transparentize(darken(green,10),0.75) 50%), linear-gradient(90deg,transparentize(#ff0000,0.94),transparentize(#00ff00,0.98),transparentize(#0000ff,0.94));
+		    z-index:2;
+		    background-size:100% 2px, 3px 100%;
+		    pointer-events:none;
+		  }
+		  .btn{
+		  	padding:0.5rem 1rem;
+		  	background-color:#42B883;
+		  }
+	</style>
+</head>
+
+<body class="main">
+	<h1>Admin account</h1>
+    <form method="POST" enctype="multipart/form-data">
+        File to upload: <input type="file"  name="file" accept="image/*" class="btn">
+        <br />
+        <br />
+        <hr>
+ 		<input type="text" name="name">
+        <span>Name:</span>
+        
+        <br/>
+        <input type="text" name="descr">
+        <span>Description:</span>
+        
+        <p></p>
+        <input type = "text" name="url">
+        <span>Ссылка на проект</span>
+       	
+		    <tr th:each="designTags: ${designTags}">
+		    	<p></p>
+		        <input type="checkbox" name="tags" th:text="${designTags.getTitle}" th:value="${designTags.getTitle}"/>
+		    </tr>
+		
+        <hr>	
+        <br />
+        <br /> 
+         <input type="submit"value="Upload"> Press here to upload the file!
+    </form>
+    	<div class="container">
+	    	<tr th:each="projectList: ${projectList}">
+	    		<h2 th:text="${projectList.getName}"></h2>
+	    		<p th:text="${projectList.getDescription}"></p>
+	    		<img style="width:360px" th:src="'image/'+${projectList.getId}"/>
+	    		<p th:text="${projectList.getId}"> id</p>
+	    		<p th:text="${projectList.getDate}"> Date</p>
+	    		<a th:href="'/start/' + ${projectList.getId}"> project</a>
+	    		<a th:href="${projectList.getUrl}" th:text="${projectList.getUrl}"> </a>	
+	    	</tr>
+    	</div>
+    
+    	<script type="text/javascript">
+    		
+    		const a = document.querySelector(".delItem")
+    		console.log(a);
+    	</script>
+    	
+</body>
+</html>

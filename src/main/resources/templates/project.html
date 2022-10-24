@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+	<style type="text/css">
+		.main{
+			background-color:#0604B9;
+			color:white;
+			margin-top:4rem;
+			font-family: 'JetBrains Mono', monospace;
+			margin-inline:auto;
+			
+			width:80%;
+		}
+		.container{
+		 
+		  width:800px;
+		  margin-top:10px;
+		  position:relative;
+		 padding: 2rem;
+		  border:2px solid #666;
+		
+		}
+		  .container::after{
+		    content:" ";
+		    display:block;
+		    position:absolute;
+		    top:0;
+		    left:0;
+		    bottom:0;
+		    right:0;
+		    background:transparentize(blue,0.9);
+		    opacity:0;
+		    z-index:2;
+		    pointer-events:none;
+		  }
+		 
+		  .container::before{
+		    content:" ";
+		    display:block;
+		    position:absolute;
+		    top:0;
+		    left:0;
+		    bottom:0;
+		    right:0;
+		    background:linear-gradient(transparentize(red,1) 50%, transparentize(darken(green,10),0.75) 50%), linear-gradient(90deg,transparentize(#ff0000,0.94),transparentize(#00ff00,0.98),transparentize(#0000ff,0.94));
+		    z-index:2;
+		    background-size:100% 2px, 3px 100%;
+		    pointer-events:none;
+		  }
+		  .btn{
+		  	margin-top:1rem;
+		  	border:none;
+		  	border-radius:40px;
+		  	padding:0.5rem 1rem;
+		  	background-color:#42B883;
+		  	margin-bottom: 1rem;
+		  }
+		  a{
+		  	margin-top:2rem;
+		  	border:none;
+		  	border-radius:40px;
+		  	padding:0.5rem 1rem;
+		  	background-color:#42B883;
+		  	color:white;
+		  }
+	</style>
+</head>
+
+<body class="main">
+	<h1>Admin account</h1>
+    
+    	<div class="container">   	
+	    		<h2 th:text="${project.getName}"></h2>
+	    		<p></p>
+	    		<p></p>
+	    		<p th:text="${project.getId}"> id</p>
+	    		<p></p>
+	    		<p th:text="${project.getDate}"> </p>
+	    		<p></p>
+	    		<p th:text="${project.getDescription}"> </p>
+	    		<p></p>
+	    		<img style="width:300px" th:src="'/image/'+${project.getId}" />
+	    		<form th:action="'/start/'+ ${project.getId} +'/delete'" method="post" >
+	    			<button type="submit" class="btn">Remove project</button>
+	    		</form>
+	    		<a th:href="'/start/'+${project.getId}+'/edit'">Edit project</a>
+    	</div>
+    
+    	<script type="text/javascript">
+    		
+    		const a = document.querySelector(".delItem")
+    		console.log(a);
+    	</script>
+    	
+</body>
+</html>
